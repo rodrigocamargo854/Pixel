@@ -3,20 +3,37 @@ import { stringify } from "node:querystring"
 import React, { useState } from "react"
 import "../styles/editor.scss"
 
-export default function () {
 
-    const [panelWidth, SetpanelWidth] = useState(16)
-    const [panelHeight, SetpanelHeight] = useState(16)
+
+
+// tipos
+interface initializeDrawingPanelProps{
+    panelWidth: number
+    SetpanelWidth: React.Dispatch<React.SetStateAction<number | undefined>>
+    panelHeight: number
+    SetpanelHeight:React.Dispatch<React.SetStateAction<number | undefined>>
+    hideOptions: Boolean
+    SethideOptions: React.Dispatch<React.SetStateAction<Boolean>>
+    hideDrawingPanel:boolean
+    SethideDrawingPanel: React.Dispatch<React.SetStateAction<Boolean>>
+    butoonText: string
+    SetbutoonText: React.Dispatch<React.SetStateAction<string>>
+    selectorColor?:string
+    SetselectColor: React.Dispatch<React.SetStateAction<string>>
+
+   
+  }
+
+export default function Editor () {
+
+    const [panelWidth, SetpanelWidth] = useState<number>(16)
+    const [panelHeight, SetpanelHeight] = useState<number>(16)
     const [hideOptions, SethideOptions] = useState(false)
     const [hideDrawingPanel, SethideDrawingPanel] = useState(true)
     const [butoonText, SetbutoonText] = useState("start drawing")
     const [selectorColor, SetselectColor] = useState('#f44336')
 
-
-interface initializeDrawingPanelProps{
-
-}
-
+    
     function initializeDrawingPanel(props: initializeDrawingPanelProps) {
         SethideOptions(!hideOptions)
         SethideDrawingPanel(!hideDrawingPanel)
@@ -38,11 +55,7 @@ interface initializeDrawingPanelProps{
                         type="number" 
                         className='panelInput'
                         defaultValue={panelWidth}
-                        onChange={(e)=> {
-
-                            SetpanelWidth(e.target.value)
-
-                        }}
+                        onChange={e => SetpanelWidth(parseInt(e.target.value))}
                         />
                         <span> Largura </span>
                     </div>
