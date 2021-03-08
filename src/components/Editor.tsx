@@ -1,46 +1,51 @@
 
 import { stringify } from "node:querystring"
-import React, { useState } from "react"
+import React, { SetStateAction, useState } from "react"
 import "../styles/editor.scss"
-
-
-
+import { CirclePicker } from 'react-color'
+import DrawingPanel from "./DrawingPanel"
 
 // tipos
-interface initializeDrawingPanelProps{
+interface initializeDrawingPanelProps {
     panelWidth: number
     SetpanelWidth: React.Dispatch<React.SetStateAction<number | undefined>>
     panelHeight: number
-    SetpanelHeight:React.Dispatch<React.SetStateAction<number | undefined>>
+    SetpanelHeight: React.Dispatch<React.SetStateAction<number | undefined>>
     hideOptions: Boolean
     SethideOptions: React.Dispatch<React.SetStateAction<Boolean>>
-    hideDrawingPanel:boolean
+    hideDrawingPanel: boolean
     SethideDrawingPanel: React.Dispatch<React.SetStateAction<Boolean>>
     butoonText: string
     SetbutoonText: React.Dispatch<React.SetStateAction<string>>
-    selectorColor?:string
-    SetselectColor: React.Dispatch<React.SetStateAction<string>>
+    selectedColor?: string
+}
 
-   
-  }
+interface Color {
+    hex: SetStateAction<string>
+}
 
-export default function Editor () {
+
+export default function Editor() {
 
     const [panelWidth, SetpanelWidth] = useState<number>(16)
     const [panelHeight, SetpanelHeight] = useState<number>(16)
     const [hideOptions, SethideOptions] = useState(false)
     const [hideDrawingPanel, SethideDrawingPanel] = useState(true)
     const [butoonText, SetbutoonText] = useState("start drawing")
-    const [selectorColor, SetselectColor] = useState('#f44336')
+    const [selectedColor, setColor] = useState('#f44336')
 
-    
-    function initializeDrawingPanel(props: initializeDrawingPanelProps) {
+
+    function initializeDrawingPanel() {
         SethideOptions(!hideOptions)
         SethideDrawingPanel(!hideDrawingPanel)
 
         butoonText == "start drawing"
             ? SetbutoonText('reset')
             : SetbutoonText("start drawing")
+    }
+
+    function changeColor(color: Color) {
+        setColor(color.hex)
     }
 
     return (
@@ -51,11 +56,11 @@ export default function Editor () {
 
                 <div id='options'>
                     <div className='option'>
-                        <input 
-                        type="number" 
-                        className='panelInput'
-                        defaultValue={panelWidth}
-                        onChange={e => SetpanelWidth(parseInt(e.target.value))}
+                        <input
+                            type="number"
+                            className='panelInput'
+                            defaultValue={panelWidth}
+                            onChange={e => SetpanelWidth(parseInt(e.target.value))}
                         />
                         <span> Largura </span>
                     </div>
@@ -66,9 +71,27 @@ export default function Editor () {
                 </div>
 
             )}
+            <button
+                onClick={initializeDrawingPanel}
+                className='button'
+            > {butoonText}
+            </button>
+            {
+                hideOptions && (
+                    <CirclePicker
+                        color={selectedColor}
+                        onChangeComplete={changeColor} />
+                )
+            }
 
-
-            <button className='button'> Começar a Desenhar</button>
+            {
+                hideOptions && (
+                    <DrawingPanel
+                        width={panelWidth}
+                        height={panelWidth}
+                        selectedColor={selectedColor}
+                        onChangeComplete={changeColor} />
+                )}
         </div>
     )
 }

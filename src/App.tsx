@@ -1,4 +1,4 @@
-import Editor from './components/Editor.tsx'
+import Editor from './components/Editor'
 import '../styles/App;scss'
 
 function App() {
