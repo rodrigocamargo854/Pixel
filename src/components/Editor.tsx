@@ -1,23 +1,13 @@
 
 import { stringify } from "node:querystring"
 import React, { SetStateAction, useState } from "react"
-import "../styles/editor.scss"
+import "../components/styles/editor.scss"
 import { CirclePicker } from 'react-color'
 import DrawingPanel from "./DrawingPanel"
 
 // tipos
-interface initializeDrawingPanelProps {
-    panelWidth: number
-    SetpanelWidth: React.Dispatch<React.SetStateAction<number | undefined>>
-    panelHeight: number
-    SetpanelHeight: React.Dispatch<React.SetStateAction<number | undefined>>
-    hideOptions: Boolean
-    SethideOptions: React.Dispatch<React.SetStateAction<Boolean>>
-    hideDrawingPanel: boolean
-    SethideDrawingPanel: React.Dispatch<React.SetStateAction<Boolean>>
-    butoonText: string
-    SetbutoonText: React.Dispatch<React.SetStateAction<string>>
-    selectedColor?: string
+interface EditorProps {
+   
 }
 
 interface Color {
@@ -25,7 +15,7 @@ interface Color {
 }
 
 
-export default function Editor() {
+export default function Editor(props : EditorProps) {
 
     const [panelWidth, SetpanelWidth] = useState<number>(16)
     const [panelHeight, SetpanelHeight] = useState<number>(16)
@@ -39,7 +29,7 @@ export default function Editor() {
         SethideOptions(!hideOptions)
         SethideDrawingPanel(!hideDrawingPanel)
 
-        butoonText == "start drawing"
+        butoonText === "start drawing"
             ? SetbutoonText('reset')
             : SetbutoonText("start drawing")
     }
@@ -65,7 +55,13 @@ export default function Editor() {
                         <span> Largura </span>
                     </div>
                     <div className='option'>
-                        <input type="number" className='panelInput' />
+                        <input 
+                        type="number" 
+                        className='panelInput' 
+                        defaultValue={panelHeight}
+                        onChange={e => SetpanelHeight(parseInt(e.target.value))}
+
+                        />
                         <span> Altura </span>
                     </div>
                 </div>

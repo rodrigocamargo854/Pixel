@@ -1,5 +1,5 @@
 import Editor from './components/Editor'
-import '../styles/App;scss'
+import '../src/components/styles/App.scss'
 
 function App() {
   return (

@@ -1,5 +1,5 @@
 import React, { useRef } from 'react'
-import '../styles/drawingPanel.scss'
+import '../components/styles/drawingPanel.scss'
 
 import Row from './Row'
 import {exportComponentAsPNG} from 'react-component-export-image'
@@ -8,7 +8,8 @@ interface DrawingPanelProps {
 
     width: number
     height: number
-    selectedColor: string
+    selectedColor: any
+    onChangeComplete:any
 }
 
 export default function DrawingPanel(props: DrawingPanelProps) {

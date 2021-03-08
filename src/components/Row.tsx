@@ -1,5 +1,5 @@
 import React from 'react'
-import '../styles/row.scss'
+import '../components/styles/row.scss'
 import Pixel from './Pixel'
 
 

@@ -1,8 +1,10 @@
 
 import React, { useState } from 'react'
-import '../styles/pixel.scss'
+import '../components/styles/pixel.scss'
 
-
+interface PixelProps{
+    selectedColor : any
+}
 
 
 export default function Pixel(props : any) {
