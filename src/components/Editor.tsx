@@ -1,29 +1,28 @@
 
-import { stringify } from "node:querystring"
-import React, { SetStateAction, useState } from "react"
+
+import { useState } from "react";
+
 import "../components/styles/editor.scss"
 import { CirclePicker } from 'react-color'
 import DrawingPanel from "./DrawingPanel"
+import { SetStateAction } from "react"
 
-// tipos
-interface EditorProps {
-   
-}
+
 
 interface Color {
-    hex: SetStateAction<string>
+    hex: SetStateAction<any>
 }
 
 
-export default function Editor(props : EditorProps) {
-
-    const [panelWidth, SetpanelWidth] = useState<number>(16)
-    const [panelHeight, SetpanelHeight] = useState<number>(16)
-    const [hideOptions, SethideOptions] = useState(false)
-    const [hideDrawingPanel, SethideDrawingPanel] = useState(true)
-    const [butoonText, SetbutoonText] = useState("start drawing")
-    const [selectedColor, setColor] = useState('#f44336')
-
+export default function Editor( ) {
+    const [panelWidth, SetpanelWidth] = useState<number>(16);
+    const [panelHeight, SetpanelHeight] = useState<number>(16);
+    const [hideOptions, SethideOptions] = useState(false);
+    const [hideDrawingPanel, SethideDrawingPanel] = useState(true);
+    const [butoonText, SetbutoonText] = useState("start drawing");
+    const [selectedColor, setColor] = useState('#f44336');
+    // exportar o selectedColor para importar como valor de cor no 
+    //selectedcolor
 
     function initializeDrawingPanel() {
         SethideOptions(!hideOptions)
@@ -33,11 +32,10 @@ export default function Editor(props : EditorProps) {
             ? SetbutoonText('reset')
             : SetbutoonText("start drawing")
     }
-
     function changeColor(color: Color) {
         setColor(color.hex)
+       //export default  selectedColor;
     }
-
     return (
         <div id='editor'>
             <h1>Editor de Pixels</h1>
@@ -70,23 +68,27 @@ export default function Editor(props : EditorProps) {
             <button
                 onClick={initializeDrawingPanel}
                 className='button'
+                
             > {butoonText}
             </button>
             {
                 hideOptions && (
                     <CirclePicker
                         color={selectedColor}
-                        onChangeComplete={changeColor} />
-                )
-            }
-
-            {
+                        onChangeComplete={changeColor} 
+                        
+                        />
+                        )
+                     }
+                
+                {
                 hideOptions && (
                     <DrawingPanel
                         width={panelWidth}
                         height={panelWidth}
                         selectedColor={selectedColor}
-                        onChangeComplete={changeColor} />
+                        
+                         />
                 )}
         </div>
     )

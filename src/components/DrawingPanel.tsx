@@ -5,11 +5,9 @@ import Row from './Row'
 import {exportComponentAsPNG} from 'react-component-export-image'
 
 interface DrawingPanelProps {
-
     width: number
     height: number
     selectedColor: any
-    onChangeComplete:any
 }
 
 export default function DrawingPanel(props: DrawingPanelProps) {
@@ -33,5 +31,5 @@ export default function DrawingPanel(props: DrawingPanelProps) {
             Exportar imagem
             </button>
         </div>
-    )
+    );
 }
