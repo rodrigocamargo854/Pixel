@@ -1,5 +1,7 @@
 ### My little project to training TypeScript.
 I hope you enjoy it :)
+![](gifPixel.gif)
+
 
 # Getting Started with Create React App
 
@@ -20,7 +22,7 @@ You will also see any lint errors in the console.
 
 
 
-## Original Project
+# Original Project
 This project was originally based in (https://aleksandarpopovic.com)
 All the credits for (https://github.com/alekspopovic)
 
