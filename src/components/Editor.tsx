@@ -10,31 +10,34 @@ import { SetStateAction } from "react"
 
 
 interface Color {
-    hex: SetStateAction<any>
+    hex: string;
 }
 
 
 export default function Editor( ) {
-    const [panelWidth, SetpanelWidth] = useState<number>(16);
-    const [panelHeight, SetpanelHeight] = useState<number>(16);
-    const [hideOptions, SethideOptions] = useState(false);
-    const [hideDrawingPanel, SethideDrawingPanel] = useState(true);
-    const [butoonText, SetbutoonText] = useState("start drawing");
-    const [selectedColor, setColor] = useState('#f44336');
+    const [panelWidth, setPanelWidth] = useState<number>(16);
+    const [panelHeight, setPanelHeight] = useState<number>(16);
+    const [hideOptions, sethideOptions] = useState(false);
+    const [hideDrawingPanel, sethideDrawingPanel] = useState(true);
+    const [butoonText, setbutoonText] = useState("start drawing");
+    const [color, setColor] = useState('#f44336');
     // exportar o selectedColor para importar como valor de cor no 
     //selectedcolor
 
     function initializeDrawingPanel() {
-        SethideOptions(!hideOptions)
-        SethideDrawingPanel(!hideDrawingPanel)
+        sethideOptions(!hideOptions)
+        sethideDrawingPanel(!hideDrawingPanel)
 
         butoonText === "start drawing"
-            ? SetbutoonText('reset')
-            : SetbutoonText("start drawing")
+            ? setbutoonText('reset')
+            : setbutoonText("start drawing")
     }
+    
+
     function changeColor(color: Color) {
         setColor(color.hex)
        //export default  selectedColor;
+       console.log(color)
     }
     return (
         <div id='editor'>
@@ -48,7 +51,7 @@ export default function Editor( ) {
                             type="number"
                             className='panelInput'
                             defaultValue={panelWidth}
-                            onChange={e => SetpanelWidth(parseInt(e.target.value))}
+                            onChange={e => setPanelWidth(parseInt(e.target.value))}
                         />
                         <span> Largura </span>
                     </div>
@@ -57,7 +60,7 @@ export default function Editor( ) {
                         type="number" 
                         className='panelInput' 
                         defaultValue={panelHeight}
-                        onChange={e => SetpanelHeight(parseInt(e.target.value))}
+                        onChange={e => setPanelHeight(parseInt(e.target.value))}
 
                         />
                         <span> Altura </span>
@@ -74,7 +77,7 @@ export default function Editor( ) {
             {
                 hideOptions && (
                     <CirclePicker
-                        color={selectedColor}
+                        color={color}
                         onChangeComplete={changeColor} 
                         
                         />
@@ -86,7 +89,7 @@ export default function Editor( ) {
                     <DrawingPanel
                         width={panelWidth}
                         height={panelWidth}
-                        selectedColor={selectedColor}
+                        selectedColor={color}
                         
                          />
                 )}

@@ -2,14 +2,9 @@
 import React, { useState } from 'react'
 import '../components/styles/pixel.scss'
 
-interface selectedColor {
-    width: number
-    height: number
-    selectedColor: any     
-}
 
 export default function Pixel(props : any ) {
-    const [selectedColor] = useState('') ;
+    const {selectedColor} = props ;
 
     const [pixelColor, setPixelColor] = useState('#fff')
     const [oldColor, setOldColor] = useState(pixelColor)
@@ -18,6 +13,7 @@ export default function Pixel(props : any ) {
     function applyColor() {
         setPixelColor(selectedColor)
         setCanChangeColor(false)
+        // console.log(pixelColor)
     }
     function changeColorOnHover() {
         setOldColor(pixelColor)
