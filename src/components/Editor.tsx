@@ -19,7 +19,7 @@ export default function Editor( ) {
     const [panelHeight, setPanelHeight] = useState<number>(16);
     const [hideOptions, sethideOptions] = useState(false);
     const [hideDrawingPanel, sethideDrawingPanel] = useState(true);
-    const [butoonText, setbutoonText] = useState("start drawing");
+    const [butoonText, setbutoonText] = useState("Desenhar");
     const [color, setColor] = useState('#f44336');
     // exportar o selectedColor para importar como valor de cor no 
     //selectedcolor
