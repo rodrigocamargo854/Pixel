@@ -19,9 +19,8 @@ export default function Editor( ) {
     const [panelHeight, setPanelHeight] = useState<number>(16);
     const [hideOptions, sethideOptions] = useState(false);
     const [hideDrawingPanel, sethideDrawingPanel] = useState(true);
-    const [butoonText, setbutoonText] = useState("Desenhar");
+    const [butoonText, setbutoonText] = useState("Draw");
     const [color, setColor] = useState('#f44336');
-    // exportar o selectedColor para importar como valor de cor no 
     //selectedcolor
 
     function initializeDrawingPanel() {
@@ -41,8 +40,8 @@ export default function Editor( ) {
     }
     return (
         <div id='editor'>
-            <h1>Editor de Pixels</h1>
-            {hideDrawingPanel && <h2> Entre com as dimensões do painel</h2>}
+            <h1>Pixels Editor</h1>
+            {hideDrawingPanel && <h2> Dimensions Panel</h2>}
             {hideDrawingPanel && (
 
                 <div id='options'>
@@ -53,7 +52,7 @@ export default function Editor( ) {
                             defaultValue={panelWidth}
                             onChange={e => setPanelWidth(parseInt(e.target.value))}
                         />
-                        <span> Largura </span>
+                        <span> Width </span>
                     </div>
                     <div className='option'>
                         <input 
@@ -63,7 +62,7 @@ export default function Editor( ) {
                         onChange={e => setPanelHeight(parseInt(e.target.value))}
 
                         />
-                        <span> Altura </span>
+                        <span> Height </span>
                     </div>
                 </div>
 
