@@ -1,34 +1,46 @@
-import React, { useRef } from 'react'
-import '../components/styles/drawingPanel.scss'
+import React, { useRef } from 'react';
+import '../components/styles/drawingPanel.scss';
 
-import Row from './Row'
-import {exportComponentAsPNG} from 'react-component-export-image'
+import Row from './Row';
+import { toPng } from 'html-to-image';
+import { saveAs } from 'file-saver';
 
 interface DrawingPanelProps {
-    width: number
-    height: number
-    selectedColor: any
+    width: number;
+    height: number;
+    selectedColor: any;
 }
 
 export default function DrawingPanel(props: DrawingPanelProps) {
-    const { width, height, selectedColor } = props
-    const panelRef:any = useRef();
+    const { width, height, selectedColor } = props;
+    const panelRef = useRef<HTMLDivElement>(null);
 
-    let rows = []
+    const handleExportAsPNG = () => {
+        if (panelRef.current === null) {
+            return;
+        }
+
+        toPng(panelRef.current)
+            .then((dataUrl) => {
+                saveAs(dataUrl, 'drawing.png');
+            })
+            .catch((error) => {
+                console.error('Erro ao exportar como PNG', error);
+            });
+    };
+
+    const rows = [];
     for (let i = 0; i < height; i++) {
-        rows.push(<Row key={i} width={width} selectedColor={selectedColor} />)
+        rows.push(<Row key={i} width={width} selectedColor={selectedColor} />);
     }
 
-    return(
+    return (
         <div id='drawingPanel'>
             <div id='pixels' ref={panelRef}>
                 {rows}
             </div>
-            <button
-            onClick={() => exportComponentAsPNG(panelRef)}
-            className='button'
-            >
-            Exportar imagem
+            <button onClick={handleExportAsPNG} className='button'>
+                Exportar imagem
             </button>
         </div>
     );
