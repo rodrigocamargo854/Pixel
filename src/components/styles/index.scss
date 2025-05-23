@@ -1,3 +1,4 @@
+/* Seu código existente */
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -10,4 +11,30 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+/* Adições para melhor responsividade global */
+
+html,
+body {
+  /* Garante que o html e body ocupem 100% da altura da viewport */
+  height: 100%;
+  /* Define o box-sizing globalmente para facilitar o layout */
+  box-sizing: border-box; 
+  /* Previne qualquer rolagem horizontal indesejada no nível mais alto */
+  overflow-x: hidden; 
+}
+
+/* Aplica box-sizing a todos os elementos, uma boa prática para responsividade */
+*, *::before, *::after {
+  box-sizing: inherit;
+}
+
+/* Se você estiver usando flexbox ou grid no body para centralizar o conteúdo verticalmente,
+   e quiser garantir que o body ocupe a altura total da tela, mesmo com pouco conteúdo. */
+body {
+    min-height: 100vh; /* Garante que o body tenha pelo menos 100% da altura da viewport */
+    width: 100%; /* Garante que o body ocupe 100% da largura disponível */
+    /* Se você tem display: flex; justify-content: center; align-items: center; no body,
+       min-height: 100vh; é crucial para centralização vertical efetiva. */
 }

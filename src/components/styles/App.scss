@@ -1,11 +1,20 @@
 @import "properties.scss";
 @import url("https://fonts.googleapis.com/css2?family=Play:wght@400;700&display=swap");
 
-body,
-html {
+html,
+body {
   margin: 0;
   padding: 0;
+  // Garante que o html e body ocupem 100% da altura da viewport
+  height: 100%;
+  // Define o box-sizing globalmente para facilitar o layout
+  box-sizing: border-box;
 }
+
+*, *::before, *::after {
+  box-sizing: inherit;
+}
+
 
 body {
   background: $black;
@@ -15,5 +24,11 @@ body {
   align-items: center;
   font-family: "Play", sans-serif;
   text-align: center;
-  min-width: fit-content;
+  // min-width: fit-content; <-- Removido ou alterado!
+  // Em vez de min-width: fit-content, use min-height: 100vh para garantir que o body ocupe a altura da tela
+  min-height: 100vh;
+  // A largura deve ser 100% por padrão, mas podemos reforçar para garantir que não haja encolhimento
+  width: 100%;
+  // Para evitar scroll horizontal indesejado
+  overflow-x: hidden;
 }
